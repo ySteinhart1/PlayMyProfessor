@@ -10,24 +10,31 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class PlayMyProfessor extends ApplicationAdapter {
 
-	private Game game;
+	private static Game game;
 	
 	@Override
 	public void create () {
-		game = new Game();
+		try {
+			game = new Game(new Professor(25, 50, 75, 100, 10));
+		} catch (Exception e) {
+		}
 	}
 
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(0, 0, .5f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		Graphics.begin();
-		Graphics.resize(1);
-		Graphics.setWordColor(Color.WHITE);
-		Graphics.drawWord("Hello world!", 200, 200);
-		Graphics.end();
+//		Graphics.begin();
+//		Graphics.resize(1);
+//		Graphics.setWordColor(Color.WHITE);
+//		Graphics.drawWord("Hello world!", 200, 200);
+//		Graphics.end();
 
 		game.render();
+	}
+
+	public static Game getGame() {
+		return game;
 	}
 
 }

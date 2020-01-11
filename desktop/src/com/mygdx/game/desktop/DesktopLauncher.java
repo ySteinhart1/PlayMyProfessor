@@ -9,8 +9,9 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new PlayMyProfessor(), config);
 
-		config.width = 800;
-		config.height = 800;
+		config.width = 1440;
+		config.height = 790;
+		config.title = "PlayMyProfessor";
 
 	}
 }

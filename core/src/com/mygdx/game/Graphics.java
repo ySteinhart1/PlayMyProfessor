@@ -18,6 +18,14 @@ public abstract class Graphics {
         font = new BitmapFont(Gdx.files.internal("font.fnt"));
     }
 
+    public static boolean xIsBetween(int x1, int x2) {
+        return Gdx.input.getX() > x1 && Gdx.input.getX() < x2;
+    }
+
+    public static boolean yIsBetween(int y1, int y2) {
+        return (790 - Gdx.input.getY()) > y1 && (790 - Gdx.input.getY()) < y2;
+    }
+
     public static void begin() {
         batch.begin();
     }
