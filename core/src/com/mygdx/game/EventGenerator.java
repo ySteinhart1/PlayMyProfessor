@@ -45,7 +45,7 @@ public class EventGenerator {
 
         int eventToChoose = 0;
         for(; eventToChoose < currentEventList.size()-1; eventToChoose++) {
-            int currentRange = floor(normalRange*eventToChoose + (generator.nextGaussian()*10+normalRange));
+            int currentRange = (int) Math.floor(normalRange*eventToChoose + (generator.nextGaussian()*10+normalRange));
             if(statAmount < currentRange)
                 break;
         }
