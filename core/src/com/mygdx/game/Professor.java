@@ -47,7 +47,15 @@ public class Professor {
     }
 
     public int getResource(Resource resource) {
+        return resources[resource.ordinal()];
+    }
 
+    public void setResource(Resource resource, int value){
+        resources[resource.ordinal()] = value;
+    }
+
+    public void changeResource(Resource resource, int value){
+        resources[resource.ordinal()] = Math.max(Math.min(resources[resource.ordinal()] + value, 100), 0);
     }
 
 
