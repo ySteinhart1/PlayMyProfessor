@@ -24,16 +24,12 @@ public class EventGenerator {
         switch(listToChoose) {
             case 0:
                 return generateEventHelper(humorEvents, Stat.HUMOR, prof);
-                break;
             case 1:
                 return generateEventHelper(engagementEvents, Stat.ENGAGEMENT, prof);
-                break;
             case 2:
                 return generateEventHelper(easinessEvents, Stat.EASINESS, prof);
-                break;
             case 3:
                 return generateEventHelper(accessibilityEvents, Stat.ACCESSIBILITY, prof);
-                break;
             default:
                 return generateEventHelper(healthEvents, Stat.HEALTH, prof);
         }

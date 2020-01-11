@@ -1,6 +1,10 @@
 package com.mygdx.game;
 
 import java.util.ArrayList;
+
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Professor.Stat;
 
 public class Game {
@@ -14,6 +18,7 @@ public class Game {
     private Professor professor;
     private String popup;
     private int popupTimer;
+    private Texture head;
 
 
     public Game(Professor professor) {
@@ -28,14 +33,15 @@ public class Game {
                     new Option("Yes", "You reported the student", new StatChange(Stat.EASINESS, -10), new StatChange(Stat.ACCESSIBILITY, -10)),
                     new Option("No", "You did not report the student", new StatChange(Stat.EASINESS, 10), new StatChange(Stat.ACCESSIBILITY, 10))))
 
-
         ));
+        head = new Texture("head1.png");
     }
 
     public void render() {
+        //professor stats
         Graphics.begin();
         professor.drawStats();
-
+        //popup
         if (popup != null) {
             popupTimer--;
             Graphics.drawWord(popup, 200, 150);
@@ -45,25 +51,39 @@ public class Game {
         }
         Graphics.end();
 
-
-
+        //tick timer
         if (currentEvent == null) {
             timer++;
         } else {
             currentEvent.drawEvent(professor);
         }
-        if (timer % 3 == 0 && currentEvent == null) {
+        if (timer % 300 == 0 && currentEvent == null) {
             //week end
-
             if (!possibleEvents.isEmpty()) {
                 int i = (int) (Math.random() * possibleEvents.size());
                 currentEvent = possibleEvents.get(i);
                 possibleEvents.remove(i);
             }
-
             week++;
         }
 
+        //progress bar
+        Graphics.getShapeRenderer().begin(ShapeRenderer.ShapeType.Filled);
+        Graphics.getShapeRenderer().setColor(Color.WHITE);
+        Graphics.getShapeRenderer().rect(100, 100, 1240, 5);
+        for (int i = 0; i < 11; i++) {
+            Graphics.getShapeRenderer().circle(1240/10*i + 100, 100, 10);
+        }
+        Graphics.getShapeRenderer().end();
+
+
+        Graphics.begin();
+        for (int i = 0; i < 10; i++) {
+            Graphics.drawWord("" + (i + 1), 1240/10*i + 100, 80);
+        }
+        Graphics.drawWord("End", 1340, 80);
+        Graphics.draw(head, 100 + 1240/10 * timer/300 - head.getWidth()/2, 110);
+        Graphics.end();
 
 
 
