@@ -10,6 +10,7 @@ public class Professor {
         if(starting_stats.length != Stat.values().length)
             throw new Exception("stats length not same length as stats");
         stats = starting_stats;
+        resources = new int[Resource.values().length];
     }
 
     public enum Stat {
@@ -25,6 +26,21 @@ public class Professor {
         CHALK,
         YERBA,
         LAPTOP
+    }
+
+    public void drawStats() {
+        for (int i = 0; i < Stat.values().length; i++) {
+            Stat stat = Stat.values()[i];
+            Graphics.resize(.75f);
+            Graphics.drawWord(stat.name() + ": " +  getStat(stat), 1100, 750 - i*35);
+            Graphics.resize(1);
+        }
+        for (int i = 0; i < Resource.values().length; i++) {
+            Resource resource = Resource.values()[i];
+            Graphics.resize(.75f);
+            Graphics.drawWord(resource.name() + ": " +  getResource(resource), 900, 750 - i*35);
+            Graphics.resize(1);
+        }
     }
 
     public double get_RMP() {

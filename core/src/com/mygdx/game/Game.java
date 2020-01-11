@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import java.util.ArrayList;
+import com.mygdx.game.Professor.Stat;
 
 public class Game {
 
@@ -11,24 +12,36 @@ public class Game {
     private int week;
     private ArrayList<Event> possibleEvents;
     private Professor professor;
+    private String popup;
+    private int popupTimer;
+
 
     public Game(Professor professor) {
         week = 1;
         this.professor = professor;
+        professor.setResource(Professor.Resource.LAPTOP, 2);
         possibleEvents = new ArrayList<Event>();
         possibleEvents.add(new Event("A student has just cheated on a quiz",
-                new Option("Give them a fail in the class", new StatChange(Professor.Stat.EASINESS, -10)),
-                new Option("Give them a 0 on the quiz", new StatChange(Professor.Stat.EASINESS, -10)),
-                new Option("Ignore them, it's too much trouble", new StatChange(Professor.Stat.HUMOR, 10))));
+                new Option("Give them a fail in the class", new ResourceCost(Professor.Resource.LAPTOP, 1), "You failed the student and made them cry. Easiness -10", new StatChange(Professor.Stat.EASINESS, -10)),
+                new Option("Ignore them, it's too much trouble", "You did the wrong thing. Humor +10", new StatChange(Professor.Stat.HUMOR, 10)),
+                new Option("Give them a 0 on the final", new Event("Do you report them for academic dishonesty?",
+                    new Option("Yes", "You reported the student", new StatChange(Stat.EASINESS, -10), new StatChange(Stat.ACCESSIBILITY, -10)),
+                    new Option("No", "You did not report the student", new StatChange(Stat.EASINESS, 10), new StatChange(Stat.ACCESSIBILITY, 10))))
+
+
+        ));
     }
 
     public void render() {
         Graphics.begin();
-        for (int i = 0; i < Professor.Stat.values().length; i++) {
-            Professor.Stat stat = Professor.Stat.values()[i];
-            Graphics.resize(.75f);
-            Graphics.drawWord(stat.name() + ": " +  professor.getStat(stat), 1000, 700 - i*50);
-            Graphics.resize(1);
+        professor.drawStats();
+
+        if (popup != null) {
+            popupTimer--;
+            Graphics.drawWord(popup, 200, 150);
+            if (popupTimer == 0) {
+                popup = null;
+            }
         }
         Graphics.end();
 
@@ -54,6 +67,11 @@ public class Game {
 
 
 
+    }
+
+    public void setPopup(String popup) {
+        this.popup = popup;
+        popupTimer = 360;
     }
 
     public void setCurrentEvent(Event currentEvent) {
