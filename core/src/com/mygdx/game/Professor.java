@@ -1,23 +1,27 @@
 package com.mygdx.game;
 
 public class Professor {
-    private final int AMOUNT_OF_STATS_TO_CALCULATE = 5;
+    private final int NUM_STATS = 5;
     //likeability, lecture_skill, consistency, humor, student-engagement
-    private final int AMOUNT_OF_OTHER_STATS = 3;
-    private int stats_to_calculate; //stats used in calculation of RMP
-            //likeability, lecture_skill, time_professor, consistency, grading_time, humor, student_engagement;
+    private int[NUM_STATS] stats;
+    private int RMP;
 
 
-
-    public Professor(int[AMOUNT_OF_STATS] starting_stats) {
+    public Professor(int[NUM_STATS] starting_stats) {
         stats = starting_stats;
     }
 
-    private void calculate_RMP() {
+    public double get_RMP() {
+        double count = 0;
+        for(int i = 0; i < NUM_STATS; i++){
+            count += stats[i];
+        }
+        return count / (NUM_STATS*20);
 
     }
 
     private void fire() {
+
 
     }
 }
