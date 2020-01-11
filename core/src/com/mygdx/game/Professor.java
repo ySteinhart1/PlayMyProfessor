@@ -3,6 +3,7 @@ package com.mygdx.game;
 public class Professor {
     //likeability, lecture_skill, consistency, humor, student-engagement
     private int[] stats;
+    private int[] resources;
 
 
     public Professor(int... starting_stats) throws Exception {
@@ -17,6 +18,13 @@ public class Professor {
         EASINESS,
         ACCESSIBILITY,
         HEALTH
+    }
+
+    public enum Resource {
+        TA,
+        CHALK,
+        YERBA,
+        LAPTOP
     }
 
     public double get_RMP() {
@@ -36,6 +44,18 @@ public class Professor {
 
     public int getStat(Stat stat) {
         return stats[stat.ordinal()];
+    }
+
+    public int getResource(Resource resource) {
+        return resources[resource.ordinal()];
+    }
+
+    public void setResource(Resource resource, int value){
+        resources[resource.ordinal()] = value;
+    }
+
+    public void changeResource(Resource resource, int value){
+        resources[resource.ordinal()] = Math.max(Math.min(resources[resource.ordinal()] + value, 100), 0);
     }
 
 
