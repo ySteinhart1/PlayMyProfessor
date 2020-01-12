@@ -19,15 +19,15 @@ public class EventGenerator {
 
     static {
         accessibilityEvents = new ArrayList<Event>();
+        accessibilityEvents.add(new Event("It is 2:00 am and you still need to write the exam for tomorrow.",
+                new Option("Pull an all-nighter", new ResourceCost(Resource.YERBA, 2), "You somehow finish and make it to class the next day.", new StatChange(Stat.HEALTH, -10), new StatChange(Stat.EASINESS, 5)),
+                new Option("Make the TAs do it.", new ResourceCost(Resource.TA, 1), "Your TAs hate you now, but the exam is finished.", new StatChange(Stat.EASINESS, -5), new StatChange(Stat.ACCESSIBILITY, 5))));
         accessibilityEvents.add(new Event("You realize you have a free afternoon.",
                 new Option("Hold extra office hours", "No one shows up.", new StatChange(Stat.ACCESSIBILITY, -10), new StatChange(Stat.ENGAGEMENT, -10)),
                 new Option("Finish grading a quiz from weeks ago.", new ResourceCost(Resource.TA, 1), "You finish and upload the grades to Gauchospace.", new StatChange(Stat.ACCESSIBILITY, 10)),
                 new Option("Go to the gym", new Event("How do you want to exercise?",
                         new Option("Biceps only.", "You wake up very sore the next day.", new StatChange(Stat.HEALTH, 10)),
                         new Option("Treadmill.", "You are physically unable to walk to your car.", new StatChange(Stat.HEALTH, -10), new StatChange(Stat.HUMOR, 5))))));
-        accessibilityEvents.add(new Event("It is 2:00 am and you still need to write the exam for tomorrow.",
-                new Option("Pull an all-nighter", new ResourceCost(Resource.YERBA, 2), "You somehow finish and make it to class the next day.", new StatChange(Stat.HEALTH, -10), new StatChange(Stat.EASINESS, 5)),
-                new Option("Make the TAs do it.", new ResourceCost(Resource.TA, 1), "Your TAs hate you now, but the exam is finished.", new StatChange(Stat.EASINESS, -5), new StatChange(Stat.ACCESSIBILITY, 5))));
         accessibilityEvents.add(new Event("You realize there are 30 students trying to crash your class.",
                 new Option("Let them all in.", new ResourceCost(Resource.CHALK, 1), "Your students are pleased but the department is not.", new StatChange(Stat.EASINESS, 5), new ResourceChange(Resource.TA, -1)),
                 new Option("Teach another lecture for no additional pay.", "You're now teaching more classes because you care about the students somewhat.", new StatChange(Stat.ENGAGEMENT, 15), new StatChange(Stat.HEALTH, -10)),
@@ -38,7 +38,7 @@ public class EventGenerator {
         randomResourceChanges.add(new ResourceChange(Resource.TA, 2, "PStat 120A was cancelled, so some of the extra TAs were given to you."));
         randomResourceChanges.add(new ResourceChange(Resource.YERBA, 3, "During a protest in front of the arbor, your manage to steal a few yerbs in the midst of the chaos."));
         randomResourceChanges.add(new ResourceChange(Resource.YERBA, -1, "You have an existential crisis all night and come to class late."));
-        randomResourceChanges.add(new ResourceChange(Resource.CHALK, 3, "You decide to buy some special Japenese chalk."));
+        randomResourceChanges.add(new ResourceChange(Resource.CHALK, 3, "You decide to buy some special Japanese chalk."));
         randomResourceChanges.add(new ResourceChange(Resource.CHALK, -1, "You wrote too hard on the chalkboard and broke your favorite chalk."));
         randomResourceChanges.add(new ResourceChange(Resource.LAPTOP, 2, "A few students leave their laptops in class, so you seize the opportunity."));
         randomResourceChanges.add(new ResourceChange(Resource.LAPTOP, -1, "A bicyclist hits you, causing you to drop your laptop bag."));
@@ -75,7 +75,7 @@ public class EventGenerator {
                         new StatChange(Professor.Stat.EASINESS, -15), new StatChange(Professor.Stat.ACCESSIBILITY, -5), new StatChange(Professor.Stat.HEALTH, 5)),
                 new Option("You pretend to change their grades, but leave everyone's grades as they are", "The students are relieved",
                         new StatChange(Professor.Stat.EASINESS, 15), new StatChange(Professor.Stat.HUMOR, 10)),
-            new Option("You give everyone an A+", new ResourceCost(Professor.Resource.YERBA, 1), "They throw a party in your honor",
+            new Option("You give everyone an A+", "They throw a party in your honor",
                 new StatChange(Professor.Stat.ENGAGEMENT, 10), new ResourceChange(Professor.Resource.YERBA, 1),  new StatChange(Professor.Stat.EASINESS, 15), new StatChange(Professor.Stat.HEALTH, -10))
         ));
 
@@ -84,7 +84,7 @@ public class EventGenerator {
 
         healthEvents.add(new Event("You catch a cold.",
                 new Option("Go to class sick.", new ResourceCost(Resource.YERBA, 1), "You only finished half your slides before losing your voice.", new StatChange(Stat.HEALTH, -15), new StatChange(Stat.ENGAGEMENT, -5), new StatChange(Stat.HUMOR, 5)),
-                new Option("Cancel class.", "You take a sick, but you're behind on lectures.", new StatChange(Stat.HEALTH, 10), new StatChange(Stat.EASINESS, -5), new ResourceChange(Professor.Resource.CHALK, 1)),
+                new Option("Cancel class.", "You take a sick day, but you're behind on lectures.", new StatChange(Stat.HEALTH, 10), new StatChange(Stat.EASINESS, -5), new ResourceChange(Professor.Resource.CHALK, 1)),
                 new Option("Get a guest lecturer.", new Event("Pick a lecturer to substitute",
                         new Option("Noah Mitchell", "Noah educates the students very well.", new StatChange(Stat.HUMOR, 5), new StatChange(Stat.HEALTH, 15)),
                         new Option("Hongmin Wang", new ResourceCost(Resource.TA, 1), "He sees he makes a mistake.", new StatChange(Stat.EASINESS, 5), new StatChange(Stat.HEALTH, 15)),

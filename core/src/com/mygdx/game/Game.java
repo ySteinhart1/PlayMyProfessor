@@ -19,6 +19,7 @@ public class Game {
     private String popup;
     private int popupTimer;
     private Texture head;
+    private boolean gameOver;
 
 
     public Game(Professor professor) {
@@ -49,7 +50,7 @@ public class Game {
         //popup
         if (popup != null) {
             popupTimer--;
-            Graphics.drawWord(popup, 200, 150);
+            Graphics.drawWord(popup, 200, 250);
             if (popupTimer == 0) {
                 popup = null;
             }
@@ -57,9 +58,9 @@ public class Game {
         Graphics.end();
 
         //tick timer
-        if (currentEvent == null) {
+        if (currentEvent == null && popup == null && !gameOver) {
             timer++;
-        } else {
+        } else if (currentEvent != null && !gameOver){
             currentEvent.drawEvent(professor);
         }
         if (timer % 150 == 0 && timer % 300 != 0 && Math.random() < .5 && currentEvent == null) {
@@ -75,6 +76,9 @@ public class Game {
 //                possibleEvents.remove(i);
 //            }
             week++;
+            if (week == 11) {
+                gameOver = true;
+            }
         }
 
         //progress bar
@@ -96,22 +100,31 @@ public class Game {
         Graphics.end();
 
 
+        //end game
+        if (gameOver) {
+
+        }
+
+
 
     }
 
     public void doEvent() {
-        if (Math.random() < .33) {
+        if (Math.random() < .5) {
             currentEvent = EventGenerator.generateEvent(professor);
-        } else if (Math.random() < .66) {
+        } else if (Math.random() < .5) {
             EventGenerator.generateRandomResourceChange(professor).execute(professor);
         } else {
             EventGenerator.generateRandomStatsChange(professor).execute(professor);
         }
+        timer++;
     }
 
     public void setPopup(String popup) {
-        this.popup = popup;
-        popupTimer = 360;
+        if (popup != null) {
+            this.popup = popup;
+            popupTimer = 240;
+        }
     }
 
     public void setCurrentEvent(Event currentEvent) {

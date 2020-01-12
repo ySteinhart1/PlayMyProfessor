@@ -22,6 +22,7 @@ public class Event implements Executable {
         for(Executable e : options[index].getExecutables()) {
             e.execute(professor);
         }
+
         if (options[index].getResourceCost() != null) {
             professor.changeResource(options[index].getResourceCost().getResource(), -options[index].getResourceCost().getValue());
         }

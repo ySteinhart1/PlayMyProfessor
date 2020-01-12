@@ -16,6 +16,7 @@ public class Option {
         this.message = message;
         this.resourceCost = resourceCost;
         this.executables = executables;
+        this.popup = popup;
     }
 
     public Option(String message, ResourceCost resourceCost, Executable... executables) {
