@@ -62,7 +62,7 @@ public class Game {
         } else {
             currentEvent.drawEvent(professor);
         }
-        if (timer % 150 == 0 && timer % 300 != 0 && Math.random() < .5) {
+        if (timer % 150 == 0 && timer % 300 != 0 && Math.random() < .5 && currentEvent == null) {
             //event halfway through week
             doEvent();
         }
