@@ -15,7 +15,7 @@ public class PlayMyProfessor extends ApplicationAdapter {
 	@Override
 	public void create () {
 		try {
-			game = new Game(new Professor(25, 50, 75, 100, 10));
+			game = new Game(new Professor((int)(Math.random()*50) + 25, (int)(Math.random()*50) + 25, (int)(Math.random()*50) + 25, (int)(Math.random()*50) + 25, (int)(Math.random()*50) + 25, (int)(Math.random()*50) + 25));
 		} catch (Exception e) {
 		}
 	}
