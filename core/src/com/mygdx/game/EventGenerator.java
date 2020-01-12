@@ -48,8 +48,8 @@ public class EventGenerator {
         easinessEvents.add(new Event("Your whole class fails a midterm.",
                 new Option( "You decide to curve the midterm", "The students are grateful and all pass the class",
                         new StatChange(Professor.Stat.EASINESS,  15), new StatChange(Professor.Stat.ACCESSIBILITY, 5)),
-                new Option("You ignore their emails and let your TA handle grades", new ResourceChange(Professor.Resource.TA, -1)
-                        , "Your TA quits out of frustration and you joke about it in class", new StatChange(Professor.Stat.HUMOR, 5), new StatChange(Professor.Stat.ACCESSIBILITY(), -10), new StatChange(Professor.Stat.EASINESS, -15)),
+                new Option("You ignore their emails and let your TA handle grades", new ResourceCost(Professor.Resource.TA, -1),
+                        "Your TA quits out of frustration and you joke about it in class", new ResourceChange(Professor.Resource.TA, -1), new StatChange(Professor.Stat.HUMOR, 5), new StatChange(Professor.Stat.ACCESSIBILITY, -10), new StatChange(Professor.Stat.EASINESS, -15)),
                 new Option("You tell them how disappointed you are", "You upset them and many of them drop",
                         new StatChange(Professor.Stat.ACCESSIBILITY, -10), new StatChange(Professor.Stat.HEALTH, 5),
                         new StatChange(Professor.Stat.EASINESS, -10))
@@ -59,7 +59,7 @@ public class EventGenerator {
                 new Option( "You immediately drop them from the class", "They are upset, but the rest of the students are grateful",
                         new StatChange(Professor.Stat.EASINESS,  -5), new StatChange(Professor.Stat.ACCESSIBILITY, 5), new StatChange(Professor.Stat.ENGAGEMENT, 10)),
                 new Option("You take a bribe to overlook their offense", "Students complain to the department head about the injustice",
-                        new StatChange(Professor.Stat.ACCESSIBILITY(), -10), new StatChange(Professor.Stat.EASINESS, 10), new StatChange(Professor.Stat.HEALTH, -10)),
+                        new StatChange(Professor.Stat.ACCESSIBILITY, -10), new StatChange(Professor.Stat.EASINESS, 10), new StatChange(Professor.Stat.HEALTH, -10)),
                 new Option("You make an announcement in class hoping to draw out other cheaters", new ResourceChange(Professor.Resource.CHALK, -1),
                         new StatChange(Professor.Stat.ACCESSIBILITY, -5),
                         new Event("Several other students come forward as cheaters",
@@ -74,9 +74,9 @@ public class EventGenerator {
                 new Option("You curve the class down to a B- average", "Students are unhappy with their new grades",
                         new StatChange(Professor.Stat.EASINESS, -15), new StatChange(Professor.Stat.ACCESSIBILITY, -5), new StatChange(Professor.Stat.HEALTH, 5)),
                 new Option("You pretend to change their grades, but leave everyone's grades as they are", "The students are relieved",
-                        new StatChange(Professor.Stat.EASINESS, 15), new StatChange(Professor.Stat.HUMOR, 10))
-        new Option("You give everyone an A+", new ResourceChange(Professor.Resource.YERBA, 1), "They throw a party in your honor",
-                new StatChange(Professor.Stat.ENGAGEMENT, 10), new StatChange(Professor.Stat.EASINESS, 15), new StatChange(Professor.Stat.HEALTH, -10))
+                        new StatChange(Professor.Stat.EASINESS, 15), new StatChange(Professor.Stat.HUMOR, 10)),
+            new Option("You give everyone an A+", new ResourceCost(Professor.Resource.YERBA, 1), "They throw a party in your honor",
+                new StatChange(Professor.Stat.ENGAGEMENT, 10), new ResourceChange(Professor.Resource.YERBA, 1),  new StatChange(Professor.Stat.EASINESS, 15), new StatChange(Professor.Stat.HEALTH, -10))
         ));
 
         healthEvents = new ArrayList<Executable>();
