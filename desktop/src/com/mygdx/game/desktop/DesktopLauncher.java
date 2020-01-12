@@ -12,6 +12,5 @@ public class DesktopLauncher {
 		config.width = 1440;
 		config.height = 790;
 		config.title = "PlayMyProfessor";
-
 	}
 }

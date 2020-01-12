@@ -18,10 +18,24 @@ public class Event implements Executable {
 
     public void chooseOption(Professor professor, int index) {
         PlayMyProfessor.getGame().setCurrentEvent(null);
-        PlayMyProfessor.getGame().setPopup(options[index].getPopup());
+
         for(Executable e : options[index].getExecutables()) {
             e.execute(professor);
         }
+
+        String popup = "";
+        if (options[index].getPopup() != null) {
+            popup += options[index].getPopup();
+        }
+        for (Executable e : options[index].getExecutables()) {
+            if (e instanceof StatChange) {
+                popup += " " + ((StatChange)e).getStat() + " " + ((StatChange)e).getValue();
+            }
+            if (e instanceof ResourceChange) {
+                popup += " " + ((ResourceChange)e).getResource() + " " + ((ResourceChange)e).getValue();
+            }
+        }
+        PlayMyProfessor.getGame().setPopup(popup);
 
         if (options[index].getResourceCost() != null) {
             professor.changeResource(options[index].getResourceCost().getResource(), -options[index].getResourceCost().getValue());
@@ -36,12 +50,12 @@ public class Event implements Executable {
     public void drawEvent(Professor professor) {
         Graphics.getShapeRenderer().begin(ShapeRenderer.ShapeType.Filled);
         for (int i = 0; i < options.length; i++) {
-            Graphics.getShapeRenderer().setColor(new Color(.75f, .75f, 1, 1));
-            Graphics.getShapeRenderer().rect(200, 400 - (i+1)*50, 1040, 50);
+            Graphics.getShapeRenderer().setColor(new Color(.5f, .5f, 1, 1));
+            Graphics.getShapeRenderer().rect(100, 400 - (i+1)*50, 1240, 50);
 
-            if (options[i].checkResources(professor) && Graphics.xIsBetween(200, 1200) && Graphics.yIsBetween(400 - (i+1)*50, 400 - i*50)) {
+            if (options[i].checkResources(professor) && Graphics.xIsBetween(100, 1340) && Graphics.yIsBetween(400 - (i+1)*50, 400 - i*50)) {
                 Graphics.getShapeRenderer().setColor(new Color(.25f, .25f, .5f, 1));
-                Graphics.getShapeRenderer().rect(200, 400 - (i + 1) * 50, 1040, 50);
+                Graphics.getShapeRenderer().rect(100, 400 - (i + 1) * 50, 1240, 50);
                 if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
                     chooseOption(professor, i);
                 }
@@ -50,9 +64,9 @@ public class Event implements Executable {
         Graphics.getShapeRenderer().end();
 
         Graphics.begin();
-        Graphics.drawWord(message, 200 + 9, 500 - 9);
+        Graphics.drawWord(message, 100 + 9, 500 - 9);
         for (int i = 0; i < options.length; i++) {
-            Graphics.drawWord(options[i].getMessage() + (options[i].getResourceCost() == null ? "" : " (costs " + options[i].getResourceCost().getValue() + " " + options[i].getResourceCost().getResource() + ")"), 200 + 9, 400 - 9 - i*50);
+            Graphics.drawWord(options[i].getMessage() + (options[i].getResourceCost() == null ? "" : " (costs " + options[i].getResourceCost().getValue() + " " + options[i].getResourceCost().getResource() + ")"), 100 + 9, 400 - 9 - i*50);
         }
         Graphics.end();
 
@@ -61,7 +75,7 @@ public class Event implements Executable {
         for (int i = 0; i < options.length; i++) {
             if (!options[i].checkResources(professor)) {
                 Graphics.getShapeRenderer().setColor(new Color(0f, 0f, 0f, .3f));
-                Graphics.getShapeRenderer().rect(200, 400 - (i + 1) * 50, 1040, 50);
+                Graphics.getShapeRenderer().rect(100, 400 - (i + 1) * 50, 1240, 50);
             }
         }
         Graphics.getShapeRenderer().end();

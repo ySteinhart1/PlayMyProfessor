@@ -17,7 +17,9 @@ public class ResourceChange  implements Executable{
 
     public void execute(Professor professor){
         professor.changeResource(resource, value);
-        PlayMyProfessor.getGame().setPopup(popup);
+        if (popup != null) {
+            PlayMyProfessor.getGame().setPopup(popup + " " + resource + " " + value);
+        }
     }
 
     public Resource getResource(){

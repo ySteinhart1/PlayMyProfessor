@@ -56,26 +56,26 @@ public class EventGenerator {
         ));
 
         easinessEvents.add(new Event("You catch a student cheating on their labs",
-                new Option( "You immediately drop them from the class", "They are upset, but the rest of the students are grateful",
+                new Option( "You immediately drop them from the class.", "They are upset, but the rest of the students are grateful.",
                         new StatChange(Professor.Stat.EASINESS,  -5), new StatChange(Professor.Stat.ACCESSIBILITY, 5), new StatChange(Professor.Stat.ENGAGEMENT, 10)),
-                new Option("You take a bribe to overlook their offense", "Students complain to the department head about the injustice",
+                new Option("You take a bribe to overlook their offense.", "Students complain to the department head about the injustice.",
                         new StatChange(Professor.Stat.ACCESSIBILITY, -10), new StatChange(Professor.Stat.EASINESS, 10), new StatChange(Professor.Stat.HEALTH, -10)),
                 new Option("You make an announcement in class hoping to draw out other cheaters", new ResourceChange(Professor.Resource.CHALK, -1),
                         new StatChange(Professor.Stat.ACCESSIBILITY, -5),
                         new Event("Several other students come forward as cheaters",
-                                new Option("Punish all of the cheaters", "The cheaters all riot and give you a bad rating on RateMyProfessor",
+                                new Option("Punish all of the cheaters.", "The cheaters all riot and give you a bad rating on RateMyProfessor.",
                                         new StatChange(Professor.Stat.EASINESS, -5), new StatChange(Professor.Stat.ACCESSIBILITY,-5), new StatChange(Professor.Stat.ENGAGEMENT,15)),
-                                new Option("Forgive all of the cheaters", "Other students are upset, but the cheaters are thankful",
+                                new Option("Forgive all of the cheaters.", "Other students are upset, but the cheaters are thankful.",
                                         new StatChange(Professor.Stat.ENGAGEMENT,-10), new StatChange(Professor.Stat.HEALTH,-5)))
                 )
         ));
 
         easinessEvents.add(new Event("Everyone gets an A in your class",
-                new Option("You curve the class down to a B- average", "Students are unhappy with their new grades",
+                new Option("Curve the class down to a B- average.", "Students are unhappy with their new grades.",
                         new StatChange(Professor.Stat.EASINESS, -15), new StatChange(Professor.Stat.ACCESSIBILITY, -5), new StatChange(Professor.Stat.HEALTH, 5)),
-                new Option("You pretend to change their grades, but leave everyone's grades as they are", "The students are relieved",
+                new Option("Pretend to change their grades, but leave everyone's grades as they are.", "The students are relieved.",
                         new StatChange(Professor.Stat.EASINESS, 15), new StatChange(Professor.Stat.HUMOR, 10)),
-            new Option("You give everyone an A+", "They throw a party in your honor",
+            new Option("Give everyone an A+.", "They throw a party in your honor.",
                 new StatChange(Professor.Stat.ENGAGEMENT, 10), new ResourceChange(Professor.Resource.YERBA, 1),  new StatChange(Professor.Stat.EASINESS, 15), new StatChange(Professor.Stat.HEALTH, -10))
         ));
 
@@ -108,7 +108,7 @@ public class EventGenerator {
 
         engagementEvents.add(new Event("Wifi is down in the middle of the class.",
                 new Option("Teach the class on the chalkboard.", new ResourceCost(Resource.CHALK, 1), "Your hand hurts.", new StatChange(Stat.HEALTH, -5), new StatChange(Stat.ENGAGEMENT, 10)),
-                new Option("Teach the class without any visuals.", new StatChange(Stat.ENGAGEMENT, -10))));
+                new Option("Teach the class without any visuals.", "Your class is very confused.", new StatChange(Stat.ENGAGEMENT, -10))));
 
         engagementEvents.add(new Event("You take a break from lecture.",
                 new Option("Give the students a pop quiz", new StatChange(Stat.ENGAGEMENT,15), new StatChange(Stat.HUMOR, -10)),
@@ -126,10 +126,10 @@ public class EventGenerator {
         humorEvents.add(new Event("A student comes to you during office hours to tell you that he was offended about a joke you made in class",
                 new Option("Ignore the student's issue", "The student complains to the class, but your reputation remains relatively unchanged",
                         new StatChange(Professor.Stat.ACCESSIBILITY, -10)),
-                new Option("Stay up all night composing a well-thought-out message apologizing to the class", new ResourceCost(Professor.Resource.YERBA,2),
+                new Option("Compose a well-crafted message apologizing to the class", new ResourceCost(Professor.Resource.YERBA,2),
                         "The class is happy to see that you care about their concerns",
                         new StatChange(Professor.Stat.ACCESSIBILITY, 15), new StatChange(Professor.Stat.HEALTH,-5)),
-                new Option("Tell the student you will make an announcement, but don't do it and hope they forget.",
+                new Option("Say you'll make an announcement, but don't and hope they forget.",
                         "The student is happy for a minute, but you become known as a liar and students pay less attention to you",
                         new StatChange(Professor.Stat.ENGAGEMENT,-10))));
 
@@ -147,7 +147,7 @@ public class EventGenerator {
         randomStatChanges.add(new StatChange(Professor.Stat.ACCESSIBILITY, 10, "Your candy stockpile in your office gets refilled, so more students come"));
         randomStatChanges.add(new StatChange(Professor.Stat.ACCESSIBILITY, -10, "Your department forces you to close some of your office hours."));
 
-        randomStatChanges.add(new StatChange(Professor.Stat.ENGAGEMENT, -10, "You have to attend a colloquim and have to cancel for a week."));
+        randomStatChanges.add(new StatChange(Professor.Stat.ENGAGEMENT, -10, "You have to attend a colloquim and have to cancel class for a week."));
         randomStatChanges.add(new StatChange(Professor.Stat.ENGAGEMENT, 10, "You buy a new book that gives you insights into teaching successfully"));
 
         randomStatChanges.add(new StatChange(Professor.Stat.EASINESS, 15, "Your department allows you to have a more generous curve for the class"));

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.Align;
 
 public abstract class Graphics {
     private static SpriteBatch batch;
@@ -47,7 +48,7 @@ public abstract class Graphics {
     }
 
     public static void drawWord(String word, int x, int y) {
-        font.draw(batch, word, x, y);
+        font.draw(batch, word, x, y, 0, word.length(), 1240, Align.left, true);
     }
 
     public static void resize(float scale) {

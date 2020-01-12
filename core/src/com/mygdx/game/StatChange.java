@@ -16,9 +16,11 @@ public class StatChange implements Executable {
         this(stat, value, null);
     }
 
-        public void execute(Professor professor) {
+    public void execute(Professor professor) {
         professor.changeStat(stat, value);
-        PlayMyProfessor.getGame().setPopup(popup);
+        if (popup != null) {
+            PlayMyProfessor.getGame().setPopup(popup + " " + stat + " " + value);
+        }
     }
 
     public Stat getStat() {
