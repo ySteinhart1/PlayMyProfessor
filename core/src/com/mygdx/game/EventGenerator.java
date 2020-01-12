@@ -143,7 +143,7 @@ public class EventGenerator {
 
 
 
-        ArrayList<Executable> randomStatChanges = new ArrayList<Executable>();
+        randomStatChanges = new ArrayList<Executable>();
         randomStatChanges.add(new StatChange(Professor.Stat.ACCESSIBILITY, 10, "Your candy stockpile in your office gets refilled, so more students come"));
         randomStatChanges.add(new StatChange(Professor.Stat.ACCESSIBILITY, -10, "Your department forces you to close some of your office hours."));
 
