@@ -9,16 +9,16 @@ import com.mygdx.game.Professor.Resource;
 public class EventGenerator {
     private static ArrayList<Executable> randomStatChanges;
     private static ArrayList<Executable> randomResourceChanges;
-    private static ArrayList<Executable> humorEvents;
-    private static ArrayList<Executable> engagementEvents;
-    private static ArrayList<Executable> easinessEvents;
-    private static ArrayList<Executable> accessibilityEvents;
-    private static ArrayList<Executable> healthEvents;
+    private static ArrayList<Event> humorEvents;
+    private static ArrayList<Event> engagementEvents;
+    private static ArrayList<Event> easinessEvents;
+    private static ArrayList<Event> accessibilityEvents;
+    private static ArrayList<Event> healthEvents;
 
     static Random generator = new Random();
 
     static {
-        accessibilityEvents = new ArrayList<Executable>();
+        accessibilityEvents = new ArrayList<Event>();
         accessibilityEvents.add(new Event("You realize you have a free afternoon.",
                 new Option("Hold extra office hours", "No one shows up.", new StatChange(Stat.ACCESSIBILITY, -10), new StatChange(Stat.ENGAGEMENT, -10)),
                 new Option("Finish grading a quiz from weeks ago.", new ResourceCost(Resource.TA, 1), "You finish and upload the grades to Gauchospace.", new StatChange(Stat.ACCESSIBILITY, 10)),
@@ -44,7 +44,7 @@ public class EventGenerator {
         randomResourceChanges.add(new ResourceChange(Resource.LAPTOP, -1, "A bicyclist hits you, causing you to drop your laptop bag."));
 
 
-        easinessEvents = new ArrayList<Executable>();
+        easinessEvents = new ArrayList<Event>();
         easinessEvents.add(new Event("Your whole class fails a midterm.",
                 new Option( "You decide to curve the midterm", "The students are grateful and all pass the class",
                         new StatChange(Professor.Stat.EASINESS,  15), new StatChange(Professor.Stat.ACCESSIBILITY, 5)),
@@ -79,8 +79,8 @@ public class EventGenerator {
                 new StatChange(Professor.Stat.ENGAGEMENT, 10), new ResourceChange(Professor.Resource.YERBA, 1),  new StatChange(Professor.Stat.EASINESS, 15), new StatChange(Professor.Stat.HEALTH, -10))
         ));
 
-        healthEvents = new ArrayList<Executable>();
-        engagementEvents = new ArrayList<Executable>();
+        healthEvents = new ArrayList<Event>();
+        engagementEvents = new ArrayList<Event>();
 
         healthEvents.add(new Event("You catch a cold.",
                 new Option("Go to class sick.", new ResourceCost(Resource.YERBA, 1), "You only finished half your slides before losing your voice.", new StatChange(Stat.HEALTH, -15), new StatChange(Stat.ENGAGEMENT, -5), new StatChange(Stat.HUMOR, 5)),
@@ -114,7 +114,7 @@ public class EventGenerator {
                 new Option("Give the students a pop quiz", new StatChange(Stat.ENGAGEMENT,15), new StatChange(Stat.HUMOR, -10)),
                 new Option("Have the students do a group activity.", new StatChange(Stat.ENGAGEMENT,10))));
 
-        humorEvents = new ArrayList<Executable>();
+        humorEvents = new ArrayList<Event>();
         humorEvents.add(new Event("You make a joke, but you are met with a deafening silence by your class.",
                 new Option("Get angry at the class for not appreciating your godly humor", "The class is uncomfortable and does not know how to react.",
                         new StatChange(Professor.Stat.HEALTH, -5), new StatChange(Professor.Stat.HUMOR, -15)),
@@ -161,7 +161,7 @@ public class EventGenerator {
     }
 
 
-    public static Executable generateEvent(Professor prof) {
+    public static Event generateEvent(Professor prof) {
         int listToChoose = generator.nextInt(5);
 
         switch(listToChoose) {
@@ -178,7 +178,7 @@ public class EventGenerator {
         }
     }
 
-    private static Executable generateEventHelper(ArrayList<Executable> currentEventList, Stat currentStat, Professor prof) {
+    private static Event generateEventHelper(ArrayList<Event> currentEventList, Stat currentStat, Professor prof) {
         int statAmount = prof.getStat(currentStat);
         double normalRange = 100.0/currentEventList.size(); //if it was same chance per event
 
