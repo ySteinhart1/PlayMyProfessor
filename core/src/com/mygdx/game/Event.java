@@ -29,10 +29,10 @@ public class Event implements Executable {
         }
         for (Executable e : options[index].getExecutables()) {
             if (e instanceof StatChange) {
-                popup += " " + ((StatChange)e).getStat() + " " + ((StatChange)e).getValue();
+                popup += " " + ((StatChange)e).getStat() + " " + ((StatChange)e).getValueString();
             }
             if (e instanceof ResourceChange) {
-                popup += " " + ((ResourceChange)e).getResource() + " " + ((ResourceChange)e).getValue();
+                popup += " " + ((ResourceChange)e).getResource() + " " + ((ResourceChange)e).getValueString();
             }
         }
         PlayMyProfessor.getGame().setPopup(popup);

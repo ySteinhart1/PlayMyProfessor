@@ -18,7 +18,7 @@ public class ResourceChange  implements Executable{
     public void execute(Professor professor){
         professor.changeResource(resource, value);
         if (popup != null) {
-            PlayMyProfessor.getGame().setPopup(popup + " " + resource + " " + value);
+            PlayMyProfessor.getGame().setPopup(popup + " " + resource + " " + getValueString());
         }
     }
 
@@ -28,6 +28,10 @@ public class ResourceChange  implements Executable{
 
     public int getValue(){
         return value;
+    }
+
+    public String getValueString() {
+        return value <= 0 ? ("" + value) : ("+" + value);
     }
 
     public String getPopup() { return popup; }

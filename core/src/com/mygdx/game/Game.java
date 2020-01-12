@@ -19,17 +19,24 @@ public class Game {
     private String popup;
     private int popupTimer;
     private Texture head;
-    private boolean gameOver;
+    private GameState gameState;
 
 
     public Game(Professor professor) {
         week = 1;
         this.professor = professor;
+        gameState = GameState.IN_PROGRESS;
         professor.setResource(Professor.Resource.LAPTOP, 1);
         professor.setResource(Professor.Resource.TA, 2);
         professor.setResource(Professor.Resource.CHALK, 2);
         professor.setResource(Professor.Resource.YERBA, 1);
         head = new Texture("head" + ((int)(Math.random()*4) + 1) + ".png");
+    }
+
+    public enum GameState {
+        IN_PROGRESS,
+        END,
+        HEALTH
     }
 
     public void render() {
@@ -47,9 +54,9 @@ public class Game {
         Graphics.end();
 
         //tick timer
-        if (currentEvent == null && popup == null && !gameOver) {
+        if (currentEvent == null && popup == null && gameState == GameState.IN_PROGRESS) {
             timer++;
-        } else if (currentEvent != null && !gameOver){
+        } else if (currentEvent != null && gameState == GameState.IN_PROGRESS){
             currentEvent.drawEvent(professor);
         }
         if (timer % 150 == 0 && timer % 300 != 0 && Math.random() < .5 && currentEvent == null) {
@@ -60,7 +67,7 @@ public class Game {
             //week end
             week++;
             if (week == 11) {
-                gameOver = true;
+                gameState = GameState.END;
             } else {
                 doEvent();
             }
@@ -86,9 +93,14 @@ public class Game {
 
 
         //end game
-        if (gameOver) {
+        if (gameState == GameState.END) {
             Graphics.begin();
             Graphics.drawWord("Rating: " + new DecimalFormat("#.#").format(professor.get_RMP()), 500, 400);
+            Graphics.end();
+        }
+        if (gameState == GameState.HEALTH) {
+            Graphics.begin();
+            Graphics.drawWord("You quit your job and decide to focus on your health instead.", 200, 400);
             Graphics.end();
         }
 
@@ -97,7 +109,7 @@ public class Game {
     }
 
     public void doEvent() {
-        if (Math.random() < .5) {
+        if (Math.random() < .75) {
             currentEvent = EventGenerator.generateEvent(professor);
         } else if (Math.random() < .5) {
             EventGenerator.generateRandomResourceChange(professor).execute(professor);
@@ -105,6 +117,9 @@ public class Game {
             EventGenerator.generateRandomStatsChange(professor).execute(professor);
         }
         timer++;
+        if (professor.getStat(Stat.HEALTH) == 0) {
+            gameState = GameState.HEALTH;
+        }
     }
 
     public void setPopup(String popup) {
